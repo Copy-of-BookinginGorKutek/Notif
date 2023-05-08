@@ -18,7 +18,7 @@ public class NotificationServiceImpl implements NotificationService{
 
     @Override
     public Notification createNotification(NotificationRequest request) {
-        if (!isUserExist(request.getEmailUser())){
+        if (Boolean.FALSE.equals(isUserExist(request.getEmailUser()))){
             throw new UserNotFoundException(request.getEmailUser());
         }
         String message = getStatusPembayaranNotifById(request.getStatusId()).getMessage();
@@ -50,7 +50,7 @@ public class NotificationServiceImpl implements NotificationService{
     @Override
     public Boolean isUserExist(String emailUser) {
         //TODO: Lakukan pemanggilan microservice untuk menentukan apakah user ada atau tidak
-        return false;
+        return true;
     }
 
     public StatusPembayaranNotif getStatusPembayaranNotifById(Integer id){
