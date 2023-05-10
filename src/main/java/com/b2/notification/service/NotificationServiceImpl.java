@@ -6,16 +6,23 @@ import com.b2.notification.exceptions.UserNotFoundException;
 import com.b2.notification.model.Notification;
 import com.b2.notification.model.StatusPembayaranNotif;
 import com.b2.notification.repository.NotificationRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 
 import java.time.LocalDateTime;
 import java.util.List;
 @Service
-@RequiredArgsConstructor
 public class NotificationServiceImpl implements NotificationService{
     private final NotificationRepository notificationRepository;
+    private final RestTemplate restTemplate;
 
+    @Autowired
+    public NotificationServiceImpl(NotificationRepository notificationRepository, RestTemplate restTemplate) {
+        this.notificationRepository = notificationRepository;
+        this.restTemplate = restTemplate;
+    }
     @Override
     public Notification createNotification(NotificationRequest request) {
         if (Boolean.FALSE.equals(isUserExist(request.getEmailUser()))){
@@ -49,7 +56,6 @@ public class NotificationServiceImpl implements NotificationService{
 
     @Override
     public Boolean isUserExist(String emailUser) {
-        //TODO: Lakukan pemanggilan microservice untuk menentukan apakah user ada atau tidak
         return true;
     }
 
