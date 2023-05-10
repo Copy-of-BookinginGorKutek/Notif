@@ -7,7 +7,11 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
+import org.mockito.ArgumentMatchers;
+import org.springframework.http.HttpStatus;
+import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +25,10 @@ class NotificationServiceImplTest {
     @Mock
     private NotificationRepository repository;
 
+    @Mock
+    private RestTemplate restTemplate;
+
+
     @BeforeEach
     void setUp(){
         MockitoAnnotations.openMocks(this);
@@ -33,8 +41,10 @@ class NotificationServiceImplTest {
     void testGetAllNotificationsByEmail(){
         List<Notification> notificationList = new ArrayList<>();
         LocalDateTime time = LocalDateTime.of(2023,5,3,12,12,12);
-        notificationList.add(new Notification(1, "abc@gmail.com", "Status terbaru Anda adalah menunggu konfirmasi", time));
-        notificationList.add(new Notification(2, "abc@gmail.com", "Status terbaru Anda adalah terkonfirmasi", time));
+        Notification first = new Notification(1, "abc@gmail.com", "Status terbaru Anda adalah menunggu konfirmasi", time);
+        Notification second = new Notification(2, "abc@gmail.com", "Status terbaru Anda adalah terkonfirmasi", time);
+        notificationList.add(first);
+        notificationList.add(second);
 
         when(repository.findAllByEmailUser("abc@gmail.com")).thenReturn(notificationList);
         List<Notification> actualNotifications = service.findByEmailUser("abc@gmail.com");
