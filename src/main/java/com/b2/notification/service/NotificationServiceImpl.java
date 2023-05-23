@@ -10,6 +10,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 @Service
 public class NotificationServiceImpl implements NotificationService{
@@ -21,10 +22,14 @@ public class NotificationServiceImpl implements NotificationService{
     @Override
     public Notification createNotification(NotificationRequest request) {
         String message = getStatusPembayaranNotifById(request.getStatusId()).getMessage();
+        LocalDateTime localDateTimeUTC = LocalDateTime.now(ZoneId.of("UTC"));
+        LocalDateTime localDateTimeConverted = localDateTimeUTC.atZone(ZoneId.of("UTC"))
+                .withZoneSameInstant(ZoneId.of("Asia/Jakarta"))
+                .toLocalDateTime();
         Notification notification = Notification.builder()
                 .emailUser(request.getEmailUser())
                 .message(message)
-                .timestamp(LocalDateTime.now())
+                .timestamp(localDateTimeConverted)
                 .build();
         notificationRepository.save(notification);
         return notification;
