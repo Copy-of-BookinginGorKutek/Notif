@@ -2,6 +2,7 @@ plugins {
     java
     id("org.springframework.boot") version "3.0.4"
     id("io.spring.dependency-management") version "1.1.0"
+    id("org.sonarqube") version "3.5.0.2730"
     jacoco
 }
 
@@ -66,5 +67,13 @@ tasks.jacocoTestReport {
         xml.required.set(false)
         csv.required.set(false)
         html.outputLocation.set(layout.buildDirectory.dir("jacocoHtml"))
+    }
+}
+
+sonarqube {
+    properties {
+        property("sonar.projectKey", "notificationB2adpro")
+        property("sonar.organization", "b2adpro")
+        property("sonar.host.url", "https://sonarcloud.io")
     }
 }
