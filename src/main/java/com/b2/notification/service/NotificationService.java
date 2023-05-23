@@ -9,5 +9,4 @@ public interface NotificationService {
     Notification createNotification(NotificationRequest request);
     List<Notification> findByEmailUser(String emailUser);
     void delete(Integer id);
-    Boolean isUserExist(String emailUser);
 }
