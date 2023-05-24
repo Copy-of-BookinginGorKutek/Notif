@@ -1,6 +1,7 @@
 package com.b2.notification.controller;
 
 import com.b2.notification.Util;
+import com.b2.notification.config.SecurityConfiguration;
 import com.b2.notification.dto.NotificationRequest;
 import com.b2.notification.model.Notification;
 import com.b2.notification.service.NotificationServiceImpl;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -23,8 +25,8 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+@Import(SecurityConfiguration.class)
 @WebMvcTest(controllers = NotificationController.class)
-@AutoConfigureMockMvc
 class NotificationControllerTest {
     @Autowired
     private MockMvc mvc;
