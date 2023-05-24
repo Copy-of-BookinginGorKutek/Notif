@@ -1,5 +1,8 @@
 package com.b2.notification.model;
 
+import lombok.Generated;
+
+@Generated
 public enum StatusPembayaranNotif {
     MENUNGGU_PEMBAYARAN(1),
     MENUNGGU_KONFIRMASI(2),
