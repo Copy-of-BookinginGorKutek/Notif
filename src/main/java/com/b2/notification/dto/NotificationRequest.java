@@ -12,4 +12,5 @@ import lombok.NoArgsConstructor;
 public class NotificationRequest {
     private String emailUser;
     private Integer statusId;
+    private String message;
 }
