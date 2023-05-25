@@ -22,6 +22,9 @@ public class NotificationServiceImpl implements NotificationService{
     @Override
     public Notification createNotification(NotificationRequest request) {
         String message = getStatusPembayaranNotifById(request.getStatusId()).getMessage();
+        if (request.getStatusId() == null) {
+            message = request.getMessage();
+        }
         LocalDateTime localDateTimeUTC = LocalDateTime.now(ZoneId.of("UTC"));
         LocalDateTime localDateTimeConverted = localDateTimeUTC.atZone(ZoneId.of("UTC"))
                 .withZoneSameInstant(ZoneId.of("Asia/Jakarta"))
