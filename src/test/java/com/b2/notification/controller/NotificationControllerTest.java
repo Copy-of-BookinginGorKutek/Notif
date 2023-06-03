@@ -71,7 +71,7 @@ class NotificationControllerTest {
 
         when(service.findByEmailUser(email)).thenReturn(allNotification);
 
-        mvc.perform(get(String.format("/notification/get/%s", email))
+        mvc.perform(get(String.format("/api/v1/notification/get/%s", email))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(handler().methodName("getAllNotificationsByEmail"))
@@ -84,7 +84,7 @@ class NotificationControllerTest {
     @Test
     @WithMockUser(roles = "USER")
     void testDeleteNotification() throws Exception {
-        mvc.perform(delete("/notification/delete/1")
+        mvc.perform(delete("/api/v1/notification/delete/1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .with(csrf()))
                 .andExpect(status().isOk())
@@ -98,7 +98,7 @@ class NotificationControllerTest {
     void testSendNotification() throws Exception {
         when(service.createNotification(any(NotificationRequest.class))).thenReturn(notification);
 
-        mvc.perform(post("/notification/send")
+        mvc.perform(post("/api/v1/notification/send")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(Util.mapToJson(bodyContent))
                         .with(csrf()))
