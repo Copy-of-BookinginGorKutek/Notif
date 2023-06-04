@@ -103,7 +103,7 @@ class NotificationControllerTest {
                         .content(Util.mapToJson(bodyContent))
                         .with(csrf()))
                 .andExpect(status().isOk())
-                .andExpect(handler().methodName("sendNotificationBasedOnStatusId"))
+                .andExpect(handler().methodName("sendNotification"))
                 .andExpect(jsonPath("$.id").value(notification.getId()));
         verify(service, atLeastOnce()).createNotification(any(NotificationRequest.class));
     }
