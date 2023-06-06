@@ -43,6 +43,8 @@ dependencies {
     runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.11.5")
     implementation("com.google.guava:guava:31.1-jre")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0")
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
+    implementation("io.micrometer:micrometer-registry-prometheus")
 }
 
 dependencyManagement {
